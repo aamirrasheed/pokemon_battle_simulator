@@ -1,5 +1,6 @@
 from typing import NamedTuple
 from pokemon import Pokemon
+from abc import ABC, abstractmethod
 
 # Battle Choice Structs
 class SwitchPokemon(NamedTuple):
@@ -15,14 +16,18 @@ class UseMove(NamedTuple):
     defending_pokemon: Pokemon
 
 # Trainer Classes and Subclasses
-class Trainer:
+class Trainer(ABC):
     def __init__(self, name, pokemon_list, item_list):
+        # initialized class variables
         self.name = name
         self.pokemon_list = pokemon_list
-        self.item_list = item_list
+        self.bag = item_list
+
+        # other class variables
+        self.active_pokemon = None
     
-    def first_pokemon(self):
-        return self.pokemon_list[0]
+    def set_active_pokemon(self):
+        self.active_pokemon = self.pokemon_list[0]
     
     def has_conscious_pokemon(self):
         for pokemon in self.pokemon_list:
@@ -30,7 +35,18 @@ class Trainer:
                 return True
         return False
     
-    def switch_pokemon()
+    def switch_pokemon(self, switch_pokemon_struct):
+        self.pokemon_list.remove(switch_pokemon_struct.next_pokemon)
+        self.pokemon_list.add(self.active_pokemon)
+        self.active_pokemon = switch_pokemon_struct.next_pokemon
+
+    def use_item(self, itemID, pokemonID):
+        self.bag.remove(wo)
+
+    @abstractmethod
+    def query_battle_choice(self):
+        pass
+
 
     
 class HumanTrainer(Trainer):
@@ -38,6 +54,7 @@ class HumanTrainer(Trainer):
         super().__init__(pokemon_list, item_list)
 
     def query_battle_choice(self):
+        pass
         # TODO: fill in 
         
 class ComputerTrainer(Trainer):
@@ -45,5 +62,6 @@ class ComputerTrainer(Trainer):
         super().__init__(pokemon_list, item_list)
 
     def query_battle_choice(self):
+        pass
         # TODO: fill in 
 

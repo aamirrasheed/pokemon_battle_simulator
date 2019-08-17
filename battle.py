@@ -5,10 +5,13 @@ class Battle:
     
     def start(self):
         # set active initial pokemon
-        active_pokemon_1 = self.trainer_1.first_pokemon()
-        active_pokemon_2 = self.trainer_2.first_pokemon()
+        self.trainer_1.set_active_pokemon()
+        self.trainer_2.set_active_pokemon()
 
         # introduce battle
+        print(self.trainer_1.name + " will challenge " + self.trainer_2.name + "!")
+        print(self.trainer_1.name + " sent out " + self.trainer_1.active_pokemon_1.name)
+        print(self.trainer_2.name + " sent out " + self.trainer_1.active_pokemon_2.name)
         
         # start battle sequence
         while self.trainer_1.has_conscious_pokemon() and self.trainer_2.has_conscious_pokemon():
